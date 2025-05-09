@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "backend.fullname" . }}{{- if eq .Values.workload.kind "StatefulSet" }}"-headless"{{- end }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "backend.labels" . | nindent 4 }}
+spec:
+  {{- if eq .Values.workload.kind "StatefulSet" }}
+  clusterIP: None
+  {{- else }}
+  type: {{ .Values.service.type }}
+  {{- end }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort}}
+      protocol: TCP
+      name: {{ .Chart.Name }}-port
+  selector:
+    {{- include "backend.selectorLabels" . | nindent 4 }}
+

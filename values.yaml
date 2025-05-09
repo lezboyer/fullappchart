@@ -1,0 +1,58 @@
+frontend:
+  workload:
+    kind: Deployment  
+    repository: lamineboye/frontend
+    tag: 1.4
+    replicas: 1
+  volumes: 
+  - name: config-volume
+    configMap:
+      name: greeting-frontend 
+
+  ingress:
+    enabled: true
+    className: "nginx"
+    annotations: 
+      nginx.ingress.kubernetes.io/rewrite-target: /
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: app-frontend.local
+        paths:
+          - path: /
+            pathType: Prefix
+
+backend:
+  workload:
+    kind: Deployment  # or StatefulSet Deployment
+    repository: lamineboye/backend
+    tag: "3.0"
+    replicas: 2
+    env:
+      - name: DB_USER
+        valueFrom:
+          secretKeyRef:
+            name: mysql-secret
+            key: mysql-user
+      - name: DB_PASS
+        valueFrom:
+          secretKeyRef:
+            name: mysql-secret
+            key: mysql-password
+      - name: DB_NAME
+        valueFrom:
+          secretKeyRef:
+            name: mysql-secret
+            key: database
+      - name: DB_HOST
+        value: greeting-mysql
+
+mysql:
+  auth:
+    existingSecret: mysql-secret
+
+  primary:
+    persistence:
+      enabled: true
+      existingClaim: mysql-hostpath-pvc
+    
