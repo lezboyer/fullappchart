@@ -1,0 +1,18 @@
+frontend:
+  workload:
+    kind: Deployment  
+    repository: lamineboye/frontend
+    tag: 1.4
+    replicas: 2
+
+backend:
+  workload:
+    kind: Deployment  # or StatefulSet Deployment
+    repository: lamineboye/backend
+    tag: "3.0"
+    replicas: 2
+
+mysql:
+  architecture: standalone
+  primary:
+    replicaCount: 2
