@@ -2,7 +2,7 @@ frontend:
   workload:
     kind: Deployment  
     repository: lamineboye/frontend
-    tag: 1.4
+    tag: 1.5
     replicas: 1
 
 backend:
