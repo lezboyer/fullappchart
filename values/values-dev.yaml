@@ -16,3 +16,7 @@ mysql:
   architecture: standalone
   primary:
     replicaCount: 1
+
+extraEnv:
+  - name: GIT_WRITE_ENABLED
+    value: true
