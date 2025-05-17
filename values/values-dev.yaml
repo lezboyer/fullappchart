@@ -1,14 +1,14 @@
 frontend:
   workload:
     kind: Deployment  
-    repository: lamineboye/frontend
+    repository: docker.io/lamineboye/frontend
     tag: 1.5
     replicas: 1
 
 backend:
   workload:
     kind: Deployment  # or StatefulSet Deployment
-    repository: lamineboye/backend
+    repository: docker.io/lamineboye/backend
     tag: "3.0"
     replicas: 1
 
