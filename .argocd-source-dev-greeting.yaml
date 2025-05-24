@@ -1,8 +1,0 @@
-helm:
-  parameters:
-  - name: image.name
-    value: docker.io/lamineboye/backend
-    forcestring: true
-  - name: image.tag
-    value: "3.0"
-    forcestring: true
