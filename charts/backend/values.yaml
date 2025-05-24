@@ -90,7 +90,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: backend.local
+    - host: app-backend.local
       paths:
         - path: /
           pathType: Prefix
