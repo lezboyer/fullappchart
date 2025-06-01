@@ -154,7 +154,7 @@ config:
   data: 
     env.js: |
       window._env_ = {
-        API_URL: "http://app-backend.local"
+        API_URL: "http://dev-backend.local"
       };
 
 
